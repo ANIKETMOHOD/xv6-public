@@ -23,7 +23,6 @@ int getpid(void);
 char* sbrk(int);
 int sleep(int);
 int uptime(void);
-int ps(void);
 int tcalls(void);
 int trunps(void);
 int tsleeps(void);

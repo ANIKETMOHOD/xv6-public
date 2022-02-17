@@ -92,12 +92,6 @@ sys_uptime(void)
 }
 
 int
-sys_ps(void)
-{
-  return ps();
-}
-
-int
 sys_tcalls(void)
 {
   if(total_calls == -1) return total_calls;
@@ -121,4 +115,3 @@ sys_tzombieps(void)
 {
   return tzombieps();
 }
-
