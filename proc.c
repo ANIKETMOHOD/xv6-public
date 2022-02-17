@@ -496,6 +496,70 @@ kill(int pid)
   return -1;
 }
 
+int
+ps()
+{
+  struct proc *p;
+  sti();
+  acquire(&ptable.lock);
+  cprintf("Name \t pid \t state \n");
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->state == SLEEPING)
+      cprintf("%s \t %d \t SLEEPING \n", p->name, p->pid);
+    else if(p->state == RUNNING)
+      cprintf("%s \t %d \t RUNNING \n", p->name, p->pid);
+    else if(p->state == RUNNABLE)
+      cprintf("%s \t %d \t RUNNABLE \n", p->name, p->pid);
+  }
+  release(&ptable.lock);
+  return 22;
+}
+
+int
+trunps(void)
+{
+  struct proc *p;
+  int count = 0;
+  acquire(&ptable.lock);
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++)
+  {
+     if(p->state != UNUSED)
+        count++;
+  }
+  release(&ptable.lock);
+  return count;
+}
+
+int
+tsleeps(void)
+{
+  struct proc *p;
+  int count = 0;
+  acquire(&ptable.lock);
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++)
+  {
+     if(p->state == SLEEPING)
+        count++;
+  }
+  release(&ptable.lock);
+  return count;
+}
+
+int
+tzombieps(void)
+{
+  struct proc *p;
+  int count = 0;
+  acquire(&ptable.lock);
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++)
+  {
+     if(p->state == ZOMBIE)
+        count++;
+  }
+  release(&ptable.lock);
+  return count;
+}
+
 //PAGEBREAK: 36
 // Print a process listing to console.  For debugging.
 // Runs when user types ^P on console.

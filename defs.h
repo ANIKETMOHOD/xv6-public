@@ -120,6 +120,11 @@ void            userinit(void);
 int             wait(void);
 void            wakeup(void*);
 void            yield(void);
+int 		ps(void);
+int 		tcalls(void);
+int 		trunps(void);
+int		tsleeps(void);
+int 		tzombieps(void);
 
 // swtch.S
 void            swtch(struct context**, struct context*);

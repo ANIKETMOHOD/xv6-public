@@ -6,6 +6,7 @@
 #include "memlayout.h"
 #include "mmu.h"
 #include "proc.h"
+int total_calls = -1;
 
 int
 sys_fork(void)
@@ -89,3 +90,35 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+int
+sys_ps(void)
+{
+  return ps();
+}
+
+int
+sys_tcalls(void)
+{
+  if(total_calls == -1) return total_calls;
+  else return total_calls + 1;
+}
+
+int
+sys_trunps(void)
+{
+  return trunps();
+}
+
+int
+sys_tsleeps(void)
+{
+  return tsleeps();
+}
+
+int
+sys_tzombieps(void)
+{
+  return tzombieps();
+}
+
